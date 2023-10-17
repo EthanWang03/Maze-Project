@@ -69,5 +69,5 @@ def generate_maze_DFS(width, height):
             
     return grid
 
-grid = generate_maze_DFS(10,10)
-print_grid(grid)  
+if __name__ == "__main__":
+    grid = generate_maze_DFS(10,10)
