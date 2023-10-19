@@ -1,73 +1,48 @@
 import random
 
-
-def create_grid(width, height):
-    maze = []
-    for i in range (0,height):
-        line = []
-        for j in range (0, width):
-            line.append('@')
-        maze.append(line)
-    return maze
-
-def print_grid(grid):
-    for i in range (0,len(grid)):
-        for j in range(0, len(grid[0])):
-            print(grid[i][j], end='   ')
-        print('\n')
-
-def starting_cell(grid):
-    width = len(grid[0])
-    height = len(grid)
+def generate_maze_dfs(width, height):
+    # Create a grid of cells
+    grid = [[1] * width for _ in range(height)]
     
-    starting_x = int(random.random()*width)
-    starting_y = int(random.random()*height)
+    def is_valid(x, y):
+        return 0 <= x < width and 0 <= y < height
 
-    if starting_y == 0:
-        starting_y += 1
-    if starting_y == height-1:
-        starting_y -= 1
-    if starting_x == 0:
-        starting_x += 1
-    if starting_x == width-1:
-        starting_x -= 1
-    return (starting_x, starting_y)
+    def get_unvisited_neighbors(x, y):
+        neighbors = [(x + 2, y), (x - 2, y), (x, y + 2), (x, y - 2)]
+        unvisited = []
 
-def get_unvisited_neighbors(grid, cell):
-    directions = [(0, 1), (0, -1), (-1, 0), (1, 0)]
-    neighbors = []
+        for nx, ny in neighbors:
+            if is_valid(nx, ny) and grid[ny][nx] == 1:
+                unvisited.append((nx, ny))
 
-    width = len(grid[0])
-    height = len(grid)
+        return unvisited
 
-    current_x, current_y = cell
-    
-    for dx, dy in directions:
-        new_x, new_y = current_x + dx, current_y + dy
+    def remove_wall_between(cx, cy, nx, ny):
+        grid[ny][nx] = 0
+        grid[cy + (ny - cy) // 2][cx + (nx - cx) // 2] = 0
 
+    # Choose a random starting cell
+    start_x = random.randrange(0, width, 2)
+    start_y = random.randrange(0, height, 2)
+    stack = [(start_x, start_y)]
 
-        if 0 <= new_x < width and 0 <= new_y < height:
-
-            if grid[new_y][new_x] == 0:
-                neighbors.append((new_x, new_y))
-
-    return neighbors
-
-def random_choice(neighbors):
-    index = random.randint(0, len(neighbors) - 1)
-    return neighbors[index]
-
-def generate_maze_DFS(width, height):
-    grid = create_grid(width, height)
-    start_cell = starting_cell(grid)
-    stack = [start_cell]
     while stack:
-        current_cell = stack[-1]
-        neighbors = get_unvisited_neighbors(grid, current_cell)
-        if neighbors:
-            neighbor = random_choice(neighbors)
-            
+        current_x, current_y = stack[-1]
+        unvisited_neighbors = get_unvisited_neighbors(current_x, current_y)
+
+        if unvisited_neighbors:
+            next_x, next_y = random.choice(unvisited_neighbors)
+            remove_wall_between(current_x, current_y, next_x, next_y)
+            stack.append((next_x, next_y))
+        else:
+            stack.pop()
+
     return grid
 
-if __name__ == "__main__":
-    grid = generate_maze_DFS(10,10)
+# Example usage:
+width, height = 21, 21  # Adjust the size as needed
+maze = generate_maze_dfs(width, height)
+
+# Print the generated maze (optional)
+for row in maze:
+    print("".join([" # " if cell == 1 else "   " for cell in row]))
