@@ -39,10 +39,13 @@ def generate_maze_dfs(width, height):
 
     return grid
 
-# Example usage:
+def print_maze(maze):
+    print("# " * (width + 2))
+    for row in maze:
+        print("# " + "".join(["# " if cell == 1 else "  " for cell in row]) + "#")
+    print("# " * (width + 2))
+
 width, height = 21, 21  # Adjust the size as needed
 maze = generate_maze_dfs(width, height)
 
-# Print the generated maze (optional)
-for row in maze:
-    print("".join([" # " if cell == 1 else "   " for cell in row]))
+print_maze(maze)
