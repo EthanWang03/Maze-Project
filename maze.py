@@ -57,13 +57,22 @@ def generate_maze_dfs(width, height):
 
     return grid
 
+def add_border(maze):
+    width = len(maze[0])
+    height = len(maze)
+    new_maze = [[1] * (width + 2) for _ in range(height + 2)]
+    for i in range(height):
+        for j in range(width):
+            new_maze[i + 1][j + 1] = maze[i][j]
+    return new_maze
+
 def print_maze(maze):
-    print("# " * (width + 2))
     for row in maze:
-        print("# " + "".join(["# " if cell == 1 else "  " for cell in row]) + "#")
-    print("# " * (width + 2))
+        print("".join(["# " if cell == 1 else "  " for cell in row]))
 
-width, height = 75, 25  # Adjust the size as needed
-maze = generate_maze_dfs(width, height)
+#width, height = 75, 25  # Adjust the size as needed
+#maze = generate_maze_dfs(width, height)
 
-print_maze(maze)
+#maze = add_border(maze)
+
+#print_maze(maze)

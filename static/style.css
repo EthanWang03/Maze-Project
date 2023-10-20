@@ -1,0 +1,34 @@
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+}
+
+h1 {
+    color: #333;
+}
+
+.maze {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.maze-row {
+    display: flex;
+    flex-direction: row;
+}
+
+.maze-cell {
+    width: 20px;
+    height: 20px;
+    display: inline-block;
+}
+
+.maze-wall {
+    background-color: #000;
+}
+
+.maze-path {
+    background-color: #fff;
+}

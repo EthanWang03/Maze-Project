@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Maze Generator</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <h1>Maze Generator</h1>
+    <div>
+        {% for row in maze %}
+        <div>
+            {% for cell in row %}
+            <div class="maze-cell {% if cell == 1 %}maze-wall{% else %}maze-path{% endif %}"></div>
+            {% endfor %}
+        </div>
+        {% endfor %}
+    </div>
+</body>
+</html>
