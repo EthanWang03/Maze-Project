@@ -6,14 +6,19 @@
 </head>
 <body>
     <h1>Maze Generator</h1>
-    <div>
-        {% for row in maze %}
-        <div>
-            {% for cell in row %}
-            <div class="maze-cell {% if cell == 1 %}maze-wall{% else %}maze-path{% endif %}"></div>
-            {% endfor %}
-        </div>
-        {% endfor %}
+    <form id="maze-form">
+        <label for="width-slider">Maze Width: <span id="width-value"></span></label>
+        <input type="range" id="width-slider" name="width" min="25" max="75" value="25"><br><br>
+
+        <label for="height-slider">Maze Height: <span id="height-value"></span></label>
+        <input type="range" id="height-slider" name="height" min="25" max="75" value="25"><br><br>
+
+        <button id="generate-button">Generate Maze</button>
+    </form>
+    <div id="maze-container">
+        <!-- Maze will be rendered here -->
     </div>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
 </body>
 </html>
