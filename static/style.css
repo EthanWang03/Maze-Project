@@ -7,28 +7,39 @@ h1 {
     color: #333;
 }
 
-.maze {
+/* Style for the maze container */
+#maze-container {
     display: flex;
-    flex-direction: column;
+    justify-content: center;
     align-items: center;
     margin-top: 20px;
 }
 
-.maze-row {
-    display: flex;
-    flex-direction: row;
+/* Style for the table */
+.maze-table {
+    border-collapse: collapse;
 }
 
-.maze-cell {
-    width: 20px;
-    height: 20px;
-    display: inline-block;
+/* Style for table rows */
+.maze-table tr {
+    height: 15px;
 }
 
-.maze-wall {
-    background-color: #000;
-}
-
-.maze-path {
+/* Style for table cells */
+.maze-table td {
+    width: 15px;
+    height: 15px;
+    text-align: center;
+    vertical-align: middle;
     background-color: #fff;
+}
+
+/* Style for walls in the maze */
+.maze-table td.wall {
+    background-color: #000; /* Color for walls */
+}
+
+/* styling for pathways */
+.maze-table td.path {
+    background-color: #fff
 }

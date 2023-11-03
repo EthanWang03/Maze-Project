@@ -13,32 +13,60 @@ heightSlider.addEventListener('input', () => {
     heightValue.textContent = heightSlider.value;
 });
 
-$(document).ready(function(){
-    $("#generate-button").click(function() {
-        $.get('/generate_maze', function(data) {
-            var mazeData = data.maze;
-            console.log(mazeData);
-        });
-    });
+document.getElementById('generate-button').addEventListener('click', function(event) {
+    // Get width and height values from slider
+    event.preventDefault();
+
+    const width = parseInt(document.getElementById('width-slider').value);
+    const height = parseInt(document.getElementById('height-slider').value);
+
+    // Generate and display Maze
+    generateMaze(width, height);
+
+    return false;
 });
 
-function renderMaze(maze) {
-    console.log('Received maze data:', maze);
-    mazeContainer.innerHTML = ''; // Clear the maze container
+function generateMaze(width, height) {
 
-    for (let row of maze) {
-        const mazeRow = document.createElement('div');
-        mazeRow.classList.add('maze-row');
+    // Get JSON return from python /generate
+    fetch('/generate-maze', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ width, height }),
+    })
+        .then(response => response.json())
+        .then(data => {
+            const mazeArray = data.maze;
+            renderMaze(mazeArray)
+        })
+        .catch(error => console.error('Error:', error));
+}
 
+function renderMaze(mazeArray) {
+
+    // Clear any existing content in the container
+    mazeContainer.innerHTML = '';
+
+    // Define CSS styles for walls and pathways
+    const wallStyle = 'wall';
+    const pathStyle = 'path';
+
+    // Create a table element to represent the maze
+    const table = document.createElement('table');
+    table.classList.add('maze-table'); // You can apply CSS styles to this class
+
+    // Iterate through the mazeArray and create rows and cells accordingly
+    for (let row of mazeArray) {
+        const rowElement = document.createElement('tr');
         for (let cell of row) {
-            const mazeCell = document.createElement('div');
-            mazeCell.classList.add('maze-cell');
-            if (cell === 1) {
-                mazeCell.classList.add('wall');
-            }
-            mazeRow.appendChild(mazeCell);
+            const cellElement = document.createElement('td');
+            cellElement.classList.add(cell ? wallStyle : pathStyle); // Apply wall or pathway style
+            rowElement.appendChild(cellElement);
         }
-
-        mazeContainer.appendChild(mazeRow);
+        table.appendChild(rowElement);
     }
+
+    mazeContainer.appendChild(table);
 }

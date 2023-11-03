@@ -58,9 +58,18 @@ def generate_maze_dfs(width, height):
     return grid
 
 def add_border(maze):
+
+    # Create new maze with width + 2 and height + 2
     width = len(maze[0])
     height = len(maze)
+    # Set new maze to all walls
     new_maze = [[1] * (width + 2) for _ in range(height + 2)]
+
+    # Create enterence and exit
+    new_maze[1][0] = 0
+    new_maze[height][width + 1] = 0
+
+    #copy over old maze to new maze array
     for i in range(height):
         for j in range(width):
             new_maze[i + 1][j + 1] = maze[i][j]

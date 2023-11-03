@@ -2,7 +2,7 @@ from flask import Flask, render_template, request, jsonify
 from maze import generate_maze_dfs, add_border
 import json
 
-app = Flask(__name__, static_url_path='/static', static_folder='static')
+app = Flask(__name__, static_url_path='', static_folder='static')
 
 
 @app.route('/')
@@ -10,18 +10,19 @@ app = Flask(__name__, static_url_path='/static', static_folder='static')
 def display_maze():
     return render_template('maze.html')
 
-@app.route('/generate_maze', methods=['GET'])
+@app.route('/generate-maze', methods=['POST'])
 def generate_maze():
 
-    width = int(request.args.get('width', 25))
-    height = int(request.args.get('height', 25))
-    
-    print('1')
+    # Get height and width values from slider
+    width = int(request.json.get('width'))
+    height = int(request.json.get('height'))
 
+    # Generate Maze
     maze = generate_maze_dfs(width, height)
     maze = add_border(maze)
 
+    # Return maze to JSON
     return jsonify({'maze': maze})
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run()
