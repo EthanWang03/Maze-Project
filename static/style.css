@@ -1,6 +1,10 @@
 body {
     font-family: Arial, sans-serif;
-    text-align: center;
+    text-align: center;   
+}
+
+#button-container {
+    text-align: center; /* Optional: align buttons to the center within the container */
 }
 
 h1 {
@@ -42,4 +46,9 @@ h1 {
 /* styling for pathways */
 .maze-table td.path {
     background-color: #fff
+}
+
+/* styling for solution */
+.maze-table td.solution {
+    background-color: #1AA7EC
 }
