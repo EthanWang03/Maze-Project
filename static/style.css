@@ -3,10 +3,6 @@ body {
     text-align: center;   
 }
 
-#button-container {
-    text-align: center; /* Optional: align buttons to the center within the container */
-}
-
 h1 {
     color: #333;
 }
@@ -40,7 +36,7 @@ h1 {
 
 /* Style for walls in the maze */
 .maze-table td.wall {
-    background-color: #000; /* Color for walls */
+    background-color: #000;
 }
 
 /* styling for pathways */
