@@ -2,6 +2,8 @@
 maze generating algorithm using DFS
 Time complexity of O(V + E)
 
+Implimentation: https://ethanwang03.pythonanywhere.com/
+
 Uses DFS algorithm to generate a maze ranging from a length and width of 25 to 75
 ![image](https://github.com/EthanWang03/Maze-Project/assets/132294719/42e0a16d-986d-43fb-8c97-0f34b0575cbf)
 
