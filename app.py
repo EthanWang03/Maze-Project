@@ -1,7 +1,7 @@
 from flask import Flask, render_template, request, jsonify
 from maze import generate_maze_dfs, solve_maze_dfs
 
-app = Flask(__name__, static_url_path='', static_folder='static')
+app = Flask(__name__)
 
 @app.route('/')
 
