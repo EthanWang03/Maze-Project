@@ -16,6 +16,8 @@ def solve_maze_dfs(maze, start, end):
     # Path to exit
     path = []
 
+    allVisitied = []
+
     while stack:
 
         # Current position
@@ -24,6 +26,7 @@ def solve_maze_dfs(maze, start, end):
         if (row, col) == end:
             # Record the path
             path.extend(stack)
+            allVisitied.extend(visited)
             break
 
         found = False
@@ -38,6 +41,11 @@ def solve_maze_dfs(maze, start, end):
 
         if not found:
             stack.pop()  # Backtrack
+
+    if allVisitied:
+        for r, c in allVisitied:
+            # Mark solution path
+            maze[r][c] = 3
 
     if path:
         for r, c in path:
@@ -129,12 +137,14 @@ def generate_maze_dfs(width, height):
     grid = add_border(grid)
     return grid
 
+
+
 # Used for testing
 def print_maze(maze):
     for row in maze:
-        print("".join(["# " if cell == 1 else "  " if cell == 0 else "- " for cell in row]))
+        print("".join(["# " if cell == 1 else "  " if cell == 0 else "- " if cell == 2 else "= " for cell in row]))
 
-#width, height = 75, 25  # Adjust the size as needed
+#width, height = 25, 25  # Adjust the size as needed
 #maze = generate_maze_dfs(width, height)
 
 #start = (1, 0)

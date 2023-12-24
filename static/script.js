@@ -59,6 +59,7 @@ function renderMaze(mazeArray) {
     const wallStyle = 'wall';
     const pathStyle = 'path';
     const solutionStyle = 'solution';
+    const visitedStyle = 'visited';
 
     // Create a table element to represent the maze
     const table = document.createElement('table');
@@ -81,6 +82,10 @@ function renderMaze(mazeArray) {
             // 2 for solution pathway
             else if (cell === 2) {
                 cellElement.classList.add(solutionStyle);
+            }
+            // 3 for visited pathway
+            else if (cell === 3) {
+                cellElement.classList.add(visitedStyle);
             }
 
             rowElement.appendChild(cellElement);

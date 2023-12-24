@@ -48,3 +48,8 @@ h1 {
 .maze-table td.solution {
     background-color: #1AA7EC
 }
+
+/* styling for visited */
+.maze-table td.visited {
+    background-color: #A3DCF5
+}
