@@ -6,7 +6,7 @@ body {
 h1 {
     color: #333;
 }
-
+  
 /* Style for the maze container */
 #maze-container {
     display: flex;
@@ -44,12 +44,12 @@ h1 {
     background-color: #fff
 }
 
-/* styling for solution */
-.maze-table td.solution {
-    background-color: #1AA7EC
-}
-
 /* styling for visited */
 .maze-table td.visited {
     background-color: #A3DCF5
+}
+
+/* styling for solution */
+.maze-table td.solution {
+    background-color: #1AA7EC
 }

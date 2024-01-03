@@ -34,9 +34,11 @@ def solve_maze():
     end = (height, width + 1)
 
     # Solve the maze
-    maze = solve_maze_dfs(maze, start, end)
+    path, allVisited = solve_maze_dfs(maze, start, end)
 
-    return jsonify({'maze': maze})
+    # print("Visited cells:", allVisited)
+
+    return jsonify({'path': path, 'visited': allVisited})
 
 if __name__ == '__main__':
     app.run()

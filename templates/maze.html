@@ -9,17 +9,24 @@
     <form id="maze-form">
         <!-- Width Slider -->
         <label for="width-slider">Maze Width: <span id="width-value">25</span></label>
-        <input type="range" id="width-slider" name="width" min="25" max="75" value="25" step="2"><br><br>
+        <input type="range" id="width-slider" name="width" min="25" max="55" value="25" step="2"><br><br>
 
         <!-- Height Slider -->
         <label for="height-slider">Maze Height: <span id="height-value">25</span></label>
-        <input type="range" id="height-slider" name="height" min="25" max="75" value="25" step="2"><br><br>
+        <input type="range" id="height-slider" name="height" min="25" max="55" value="25" step="2"><br><br>
 
         <!-- Generate button -->
         <button id="generate-button">Generate Maze</button>
 
         <!-- Solve button -->
         <button id="solve-button">Solve Maze</button>
+
+        <!-- Checkbox for displaying steps -->
+        <label id="step-button">Show Steps<input type="checkbox" id="showStepsCheckbox"></label>
+
+        <!-- Clear button -->
+        <button id="clear-button">Clear Maze</button>
+        
     </form>
     <div id="maze-container">
         <!-- Maze will be rendered here -->
