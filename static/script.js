@@ -104,10 +104,10 @@ function renderMaze(mazeArray) {
 
 function renderMazeSolution(pathArray) {
     const solutionStyle = 'solution';
-    const visitedStyle = 'visited';
     const pathStyle = 'path';
     const mazeTable = document.querySelector('.maze-table');
 
+    // clear any delayed processes
     timeoutIds.forEach(id => clearTimeout(id));
     timeoutIds = [];
 
@@ -116,10 +116,11 @@ function renderMazeSolution(pathArray) {
 
         for (let i = 0; i < pathArray.length; i++) {
             const [row, col] = pathArray[i];
-                    
+
             if (rows[row]) {
                 const cells = rows[row].getElementsByTagName('td');
 
+                // render solution path
                 if (cells[col]) {
                     cells[col].classList.remove(pathStyle);
                     cells[col].classList.add(solutionStyle);
@@ -192,6 +193,8 @@ function renderMazeSolutionWithSteps(visitedArray, pathArray) {
                     const cells = rows[row].getElementsByTagName('td');
 
                     if (cells[col]) {
+
+                        // check if visited cell is part of the solution path
                         if (pathArray.some(([pathRow, pathCol]) => pathRow === row && pathCol === col)) {
                             cells[col].classList.remove(pathStyle);
                             cells[col].classList.add(solutionStyle);
@@ -239,7 +242,7 @@ function solveMaze() {
         alert('No maze generated yet');
         return;
     }
-    
+
     // Get JSON return from python /generate
     fetch('/solve-maze', {
         method: 'POST',
