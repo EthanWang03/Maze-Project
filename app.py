@@ -1,5 +1,5 @@
-from flask import Flask, render_template, request, jsonify
-from maze import generate_maze_dfs, solve_maze_dfs
+from flask import Flask, render_template, request, jsonify, json
+from maze import generate_maze_dfs, solve_maze_dfs, solve_maze_bfs
 
 app = Flask(__name__)
 
@@ -15,6 +15,8 @@ def generate_maze():
     width = int(request.json.get('width'))
     height = int(request.json.get('height'))
 
+    height = int(request.json.get('height'))
+
     # Generate Maze
     maze = generate_maze_dfs(width, height)
 
@@ -23,7 +25,9 @@ def generate_maze():
 
 @app.route('/solve-maze', methods=['POST'])
 def solve_maze():
-    maze = request.json.get('maze')
+
+    # get maze array 
+    maze = json.loads(request.form.get('maze'))
 
     # Account for new larger size 
     height = len(maze) - 2
@@ -33,8 +37,18 @@ def solve_maze():
     start = (1, 0)
     end = (height, width + 1)
 
+    selected_algorithm = request.form.get('algorithm')
+
+    print(selected_algorithm)
+
     # Solve the maze
-    path, allVisited = solve_maze_dfs(maze, start, end)
+    # Solve the maze
+    if selected_algorithm == 'dfs':
+        path, allVisited = solve_maze_dfs(maze, start, end)
+    elif selected_algorithm == 'bfs':
+        path, allVisited = solve_maze_bfs(maze, start, end)
+    else:
+        return jsonify({'error': 'Invalid algorithm'})
 
     # print("Visited cells:", allVisited)
 

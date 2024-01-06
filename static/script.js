@@ -235,21 +235,24 @@ document.getElementById('clear-button').addEventListener('click', function(event
 function solveMaze() {
 
     const showStepsCheckbox = document.getElementById('showStepsCheckbox');
+    const algorithmSelect = document.getElementById('algorithmSelect');
 
     const showSteps = showStepsCheckbox.checked;
+    const selectedAlgorithm = algorithmSelect.value;
 
     if (mazeArray === undefined) {
         alert('No maze generated yet');
         return;
     }
 
+    const formData = new FormData();
+    formData.append('maze', JSON.stringify(mazeArray));
+    formData.append('algorithm', selectedAlgorithm);
+
     // Get JSON return from python /generate
     fetch('/solve-maze', {
         method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ maze: mazeArray }), // Pass the generated maze
+        body: formData, // Pass the generated maze and algorithm drop down value
     })
         .then(response => response.json())
         .then(data => {

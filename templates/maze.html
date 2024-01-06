@@ -14,9 +14,22 @@
         <!-- Height Slider -->
         <label for="height-slider">Maze Height: <span id="height-value">25</span></label>
         <input type="range" id="height-slider" name="height" min="25" max="55" value="25" step="2"><br><br>
+        
+        <div class="selector-container">
+            <form id="algorithmForm">
+                <label for="algorithmSelect">Algorithm:</label>
+                <select id="algorithmSelect" name="algorithm">
+                    <option value="dfs">Depth-First Search</option>
+                    <option value="bfs">Breadth-First Search</option>
+                </select>
+            </form>
+        </div>
 
         <!-- Generate button -->
         <button id="generate-button">Generate Maze</button>
+
+        <!-- Clear button -->
+        <button id="clear-button">Clear Maze</button>
 
         <!-- Solve button -->
         <button id="solve-button">Solve Maze</button>
@@ -24,9 +37,6 @@
         <!-- Checkbox for displaying steps -->
         <label id="step-button">Show Steps<input type="checkbox" id="showStepsCheckbox"></label>
 
-        <!-- Clear button -->
-        <button id="clear-button">Clear Maze</button>
-        
     </form>
     <div id="maze-container">
         <!-- Maze will be rendered here -->

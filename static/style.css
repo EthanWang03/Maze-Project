@@ -6,6 +6,11 @@ body {
 h1 {
     color: #333;
 }
+
+/* style for selector container */
+.selector-container {
+    padding: 10px;
+}
   
 /* Style for the maze container */
 #maze-container {
