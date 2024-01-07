@@ -2,10 +2,19 @@ const widthSlider = document.getElementById('width-slider');
 const widthValue = document.getElementById('width-value');
 const heightSlider = document.getElementById('height-slider');
 const heightValue = document.getElementById('height-value');
+
 const mazeContainer = document.getElementById('maze-container');
+
 const generateButton = document.getElementById('generate-button');
+
 const solveButton = document.getElementById('solve-button');
+
 const clearButton = document.getElementById('clear-button');
+
+const solutionLength = document.getElementById('solution-length');
+const solutionLengthValue = document.getElementById('solution-length-value');
+const cellsVisited = document.getElementById('cells-visited');
+const cellsVisitedValue = document.getElementById('cells-visited-value');
 
 mazeArray = undefined;
 
@@ -69,7 +78,10 @@ function renderMaze(mazeArray) {
 
     // Create a table element to represent the maze
     const table = document.createElement('table');
-    table.classList.add('maze-table'); // You can apply CSS styles to this class
+    table.classList.add('maze-table');
+
+    solutionLengthValue.textContent = 0;
+    cellsVisitedValue.textContent = 0;
 
     // Iterate through the mazeArray and create rows and cells accordingly
     for (let row of mazeArray) {
@@ -102,7 +114,7 @@ function renderMaze(mazeArray) {
     mazeContainer.appendChild(table);
 }
 
-function renderMazeSolution(pathArray) {
+function renderMazeSolution(visitedArray, pathArray) {
     const solutionStyle = 'solution';
     const pathStyle = 'path';
     const mazeTable = document.querySelector('.maze-table');
@@ -128,6 +140,9 @@ function renderMazeSolution(pathArray) {
             }
         }
     }
+
+    solutionLengthValue.textContent = pathArray.length;
+    cellsVisitedValue.textContent = visitedArray.length;
 }
 
 function wipeMaze() {
@@ -139,6 +154,9 @@ function wipeMaze() {
     // clear any delayed processes 
     timeoutIds.forEach(id => clearTimeout(id));
     timeoutIds = [];
+
+    solutionLengthValue.textContent = 0;
+    cellsVisitedValue.textContent = 0;
 
     if (mazeTable) {
         const rows = mazeTable.getElementsByTagName('tr');
@@ -169,12 +187,15 @@ function wipeMaze() {
     }
 }
 
-// render the steps that dfs uses to find the maze solution
+// render the steps that are used to find the maze solution
 function renderMazeSolutionWithSteps(visitedArray, pathArray) {
     const visitedStyle = 'visited';
     const pathStyle = 'path';
     const solutionStyle = 'solution';
     const mazeTable = document.querySelector('.maze-table');
+
+    var solutionCounter = 0;
+    var visitedCounter = 0;
 
     // clear any delayed processes 
     timeoutIds.forEach(id => clearTimeout(id));
@@ -198,11 +219,16 @@ function renderMazeSolutionWithSteps(visitedArray, pathArray) {
                         if (pathArray.some(([pathRow, pathCol]) => pathRow === row && pathCol === col)) {
                             cells[col].classList.remove(pathStyle);
                             cells[col].classList.add(solutionStyle);
+                            solutionCounter = solutionCounter + 1;
+                            visitedCounter = visitedCounter + 1
                         } else {
                             cells[col].classList.remove(pathStyle);
                             cells[col].classList.add(visitedStyle);
+                            visitedCounter = visitedCounter + 1
                         }
                     }
+                    solutionLengthValue.textContent = solutionCounter;
+                    cellsVisitedValue.textContent = visitedCounter;
                 }
             }, i * 50);
 
@@ -268,7 +294,7 @@ function solveMaze() {
                 renderMazeSolutionWithSteps(visitedArray, pathArray);
             } else {
                 wipeMaze();
-                renderMazeSolution(pathArray);
+                renderMazeSolution(visitedArray, pathArray);
             }
         })
         .catch(error => console.error('Error:', error));

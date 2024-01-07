@@ -11,6 +11,15 @@ h1 {
 .selector-container {
     padding: 10px;
 }
+
+/* style for solution display container */
+.solution-container {
+    padding: 10px;
+}
+
+.solution-container > * {
+    margin-right: 20px;
+}
   
 /* Style for the maze container */
 #maze-container {

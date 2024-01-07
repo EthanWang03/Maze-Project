@@ -1,5 +1,7 @@
 from flask import Flask, render_template, request, jsonify, json
-from maze import generate_maze_dfs, solve_maze_dfs, solve_maze_bfs
+from maze import generate_maze_dfs
+from bfs import solve_maze_bfs
+from dfs import solve_maze_dfs
 
 app = Flask(__name__)
 
@@ -39,7 +41,7 @@ def solve_maze():
 
     selected_algorithm = request.form.get('algorithm')
 
-    print(selected_algorithm)
+    # print(selected_algorithm)
 
     # Solve the maze
     # Solve the maze
