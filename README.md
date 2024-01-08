@@ -1,5 +1,5 @@
 # Maze-Project
-maze generating algorithm using DFS
+maze generating algorithm using DFS and BFS
 
 Implimentation: https://ethanwang03.pythonanywhere.com/
 
