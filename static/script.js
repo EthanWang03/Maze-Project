@@ -15,6 +15,9 @@ const solutionLength = document.getElementById('solution-length');
 const solutionLengthValue = document.getElementById('solution-length-value');
 const cellsVisited = document.getElementById('cells-visited');
 const cellsVisitedValue = document.getElementById('cells-visited-value');
+const executionTime = document.getElementById('execution-time');
+const executionTimeValue = document.getElementById('execution-time-value');
+
 
 mazeArray = undefined;
 
@@ -119,6 +122,8 @@ function renderMazeSolution(visitedArray, pathArray) {
     const pathStyle = 'path';
     const mazeTable = document.querySelector('.maze-table');
 
+    const startTime = performance.now();
+
     // clear any delayed processes
     timeoutIds.forEach(id => clearTimeout(id));
     timeoutIds = [];
@@ -143,6 +148,9 @@ function renderMazeSolution(visitedArray, pathArray) {
 
     solutionLengthValue.textContent = pathArray.length;
     cellsVisitedValue.textContent = visitedArray.length;
+    const endTime = performance.now();
+    const executionTime = (endTime - startTime); // Convert to seconds
+    executionTimeValue.textContent = `${executionTime.toFixed(2)}ms`;
 }
 
 function wipeMaze() {
@@ -157,6 +165,7 @@ function wipeMaze() {
 
     solutionLengthValue.textContent = 0;
     cellsVisitedValue.textContent = 0;
+    executionTimeValue.textContent = `0ms`;
 
     if (mazeTable) {
         const rows = mazeTable.getElementsByTagName('tr');
@@ -201,6 +210,8 @@ function renderMazeSolutionWithSteps(visitedArray, pathArray) {
     timeoutIds.forEach(id => clearTimeout(id));
     timeoutIds = [];
 
+    const startTime = performance.now();
+
     if (mazeTable) {
         const rows = mazeTable.getElementsByTagName('tr');
 
@@ -230,6 +241,9 @@ function renderMazeSolutionWithSteps(visitedArray, pathArray) {
                     solutionLengthValue.textContent = solutionCounter;
                     cellsVisitedValue.textContent = visitedCounter;
                 }
+                const endTime = performance.now();
+                const executionTime = (endTime - startTime) / 1000; // Convert to seconds
+                executionTimeValue.textContent = `${executionTime.toFixed(2)}s`;
             }, i * 50);
 
             timeoutIds.push(timeoutId);
