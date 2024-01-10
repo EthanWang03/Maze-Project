@@ -88,17 +88,10 @@ def print_maze(maze):
         print("".join(["# " if cell == 1 else "  " if cell == 0 else "- " if cell == 2 else "= " for cell in row]))
         #print("".join(["## " if cell == 1 else "   " if cell == 0 else str(cell) + " " for cell in row]))
 
-"""
 width, height = 15, 15  # Adjust the size as needed
 maze = generate_maze_dfs(width, height)
 
-start = (1, 0)
-end = (height, width + 1)
+print_maze(maze)
 
-path, visited = solve_maze_bfs(maze, start, end)
-
-print(path)
-print(visited)
-"""
 
 
