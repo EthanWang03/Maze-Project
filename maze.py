@@ -88,10 +88,11 @@ def print_maze(maze):
         print("".join(["# " if cell == 1 else "  " if cell == 0 else "- " if cell == 2 else "= " for cell in row]))
         #print("".join(["## " if cell == 1 else "   " if cell == 0 else str(cell) + " " for cell in row]))
 
-width, height = 15, 15  # Adjust the size as needed
+"""
+width, height = 15, 15
 maze = generate_maze_dfs(width, height)
 
 print_maze(maze)
-
+"""
 
 
