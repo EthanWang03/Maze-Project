@@ -2,6 +2,7 @@ from flask import Flask, render_template, request, jsonify, json
 from maze import generate_maze_dfs
 from bfs import solve_maze_bfs
 from dfs import solve_maze_dfs
+from astar import solve_maze_astar
 
 app = Flask(__name__)
 
@@ -49,6 +50,8 @@ def solve_maze():
         path, allVisited = solve_maze_dfs(maze, start, end)
     elif selected_algorithm == 'bfs':
         path, allVisited = solve_maze_bfs(maze, start, end)
+    elif selected_algorithm == 'astar':
+        path, allVisited = solve_maze_astar(maze, start, end)
     else:
         return jsonify({'error': 'Invalid algorithm'})
 
