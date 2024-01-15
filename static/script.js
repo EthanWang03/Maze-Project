@@ -83,8 +83,13 @@ function renderMaze(mazeArray) {
     const table = document.createElement('table');
     table.classList.add('maze-table');
 
+    // Clear any tasks
+    timeoutIds.forEach(id => clearTimeout(id));
+    timeoutIds = [];
+
     solutionLengthValue.textContent = 0;
     cellsVisitedValue.textContent = 0;
+    executionTimeValue.textContent = `0ms`;
 
     // Iterate through the mazeArray and create rows and cells accordingly
     for (let row of mazeArray) {
