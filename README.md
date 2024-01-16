@@ -11,9 +11,9 @@ There is also an option to generate a solution to the maze
 The user has the choice to solve the maze using DFS, BFS or A* algorithm
 It also returns the number of cells visited before the solution is found as well as the length of the solution path and the execution time
 
-![image](https://github.com/EthanWang03/Maze-Project/assets/132294719/76e6ccf1-3b1f-4539-97c3-3f1653ec27f1)
+![image](https://github.com/EthanWang03/Maze-Project/assets/132294719/31915add-da88-427e-9378-69d14795c291)
 
-![image](https://github.com/EthanWang03/Maze-Project/assets/132294719/ab472aec-f9bc-4fcd-b809-18155450a250)
+![image](https://github.com/EthanWang03/Maze-Project/assets/132294719/fa4bfda6-14b0-4cd2-b721-710812aad70c)
 
 There is also an option to show the steps that the algorithm uses to find the solution to the maze using an animation
 The lighter blue paths show visited pathways and the dark blue paths show the solution path that the algorithm found
